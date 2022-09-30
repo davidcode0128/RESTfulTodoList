@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.Davidcode.RESTfulMyWeb.model.entity.RESTfulTodo;
@@ -78,8 +80,8 @@ public class TestRESTfulTodoController {
 		Mockito.when(todoService.createTodo(mockTodo)).thenReturn(1);
 
 		// 模擬呼叫[POST] /api/todos
-		String actual = mockMvc
-				.perform(MockMvcRequestBuilders.post("/api/todos")
+		String actual = ((ResultActions) ((MockHttpServletRequestBuilder) mockMvc
+						.perform(MockMvcRequestBuilders.post("/api/todos")))			
 						.accept(MediaType.APPLICATION_JSON) // response 設定型別
 						.contentType(MediaType.APPLICATION_JSON) // request 設定型別
 						.content(String.valueOf(todoObject))) // body 內容
