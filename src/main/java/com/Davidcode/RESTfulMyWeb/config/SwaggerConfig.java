@@ -1,4 +1,4 @@
-package com.Davidcode.RESTfulMyWeb;
+package com.Davidcode.RESTfulMyWeb.config;
 
 import java.util.Collections;
 import org.springframework.context.annotation.Bean;
