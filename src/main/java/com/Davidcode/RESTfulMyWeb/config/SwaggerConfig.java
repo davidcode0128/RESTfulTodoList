@@ -1,6 +1,6 @@
 package com.Davidcode.RESTfulMyWeb.config;
 
-import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -22,24 +23,25 @@ public class SwaggerConfig implements WebMvcConfigurer{
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .select()                
+        		.apiInfo(apiInfo())
+                .select()               
+                // 搜尋有@Tag註解的類，並生成一個對應的分組；類下面的所有http請求方法，都會生成對應的API接口
+            	// 通過這個配置，就可以將那些沒有添加@Tag註解的控制器類排除掉
+                //.apis(RequestHandlerSelectors.withClassAnnotation(Tag.class))
                 .apis(RequestHandlerSelectors.basePackage("com.Davidcode.RESTfulMyWeb.controller"))
                 .paths(PathSelectors.any())
-                //.paths(Predicates.negate(PathSelectors.regex("/error.*")))
-                //.paths(Predicate.not(PathSelectors.regex("/error.*")))
-                .build()
-                .apiInfo(apiInfo());
+                .build();
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "RESTful To Do List",
-                "RESTful To Do List API",
-                "v1.0",
-                "",
-                new Contact("Davidcode", "",
-                        "ckorsock1@gmail.com"),
-                "", "", Collections.emptyList());
+    	return new ApiInfoBuilder()
+    			.title("RESTful To Do List")
+    			.description("RESTful To Do List API")
+    			.version("v1.0")
+    			.termsOfServiceUrl("https://davidcode.netlify.app/")
+    			.contact(new Contact("Davidcode", "https://davidcode.netlify.app/",
+                        "ckorsock1@gmail.com"))
+    			.build();
     }
     
     @Override

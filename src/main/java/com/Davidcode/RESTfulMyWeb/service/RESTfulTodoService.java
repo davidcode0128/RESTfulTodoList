@@ -39,8 +39,7 @@ public class RESTfulTodoService {
 	}
 
 	public Optional<RESTfulTodo> findById(Integer id) {
-		Optional<RESTfulTodo> todo = todoDao.findById(id);
-		return todo;
+		return todoDao.findById(id);
 	}
 
 	public Boolean deleteTodo(Integer id) {

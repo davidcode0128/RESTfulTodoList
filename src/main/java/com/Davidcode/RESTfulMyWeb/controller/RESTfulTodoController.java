@@ -59,8 +59,7 @@ public class RESTfulTodoController {
 
 	@GetMapping("/todos/{id}")
 	public Optional<RESTfulTodo> getTodo(@PathVariable Integer id) {
-		Optional<RESTfulTodo> todo = todoService.findById(id);
-		return todo;
+		return todoService.findById(id);
 	}
 
 	@PostMapping("/todos")

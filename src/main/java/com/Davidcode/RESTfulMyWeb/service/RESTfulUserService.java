@@ -14,7 +14,6 @@ public class RESTfulUserService {
 	RESTfulUserDao UserDao;  
 
 	public Optional<RESTfulUser> getTodosByUserId(Integer id) {
-		Optional<RESTfulUser> data = UserDao.findById(id);
-		return data;
+		return UserDao.findById(id);
 	}
 }

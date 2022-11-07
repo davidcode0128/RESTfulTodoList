@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Data //@Data = @Getter/@Setter+@ToString+@EqualsAndHashCode+@RequiredArgsConstruct
 @Entity
 @Table
 public class RESTfulTodo {
